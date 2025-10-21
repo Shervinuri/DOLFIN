@@ -1,0 +1,5 @@
+{
+  "name": "Holographic Chat Interface",
+  "description": "A visually stunning chat interface enclosed in a holographic, glowing frame with animated light particle effects. The application features a futuristic design with a carbon-fiber-like background and embeds an external chat service within a custom UI.",
+  "requestFramePermissions": []
+}

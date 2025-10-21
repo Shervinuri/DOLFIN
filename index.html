@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Holographic Chat Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            -webkit-touch-callout: none; /* iOS Safari */
+        }
+
+        /* Custom animations and complex styles that can't be done with Tailwind classes alone */
+        @keyframes metallic-sheen {
+            0% { background-position: 150% 150%; }
+            100% { background-position: -50% -50%; }
+        }
+        @keyframes subtle-flicker {
+            from { opacity: 0.6; transform: var(--transform-flicker-from); }
+            to { opacity: 0.9; transform: var(--transform-flicker-to); }
+        }
+        @keyframes wave {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* New watermark animation */
+        @keyframes watermark-wave {
+            0% { background-position: 0% 0%, 0% 50%; }
+            25% { background-position: 50% 50%, 100% 50%; }
+            50% { background-position: 100% 100%, 50% 100%; }
+            75% { background-position: 50% 0%, 0% 50%; }
+            100% { background-position: 0% 0%, 0% 50%; }
+        }
+
+        /* New styles for animated border */
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @keyframes rotate-angle {
+            to {
+                --angle: 360deg;
+            }
+        }
+
+        .animated-iframe-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px; /* border thickness */
+            background: conic-gradient(
+                from var(--angle),
+                #00FFFF 0deg,
+                #00FFFF 175deg,
+                #8A2BE2 178deg, /* Small purple section */
+                #8A2BE2 182deg,
+                #00FFFF 185deg,
+                #00FFFF 360deg
+            );
+            animation: rotate-angle 4s linear infinite;
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none; /* Allow clicks/touches to pass through */
+        }
+
+        .animate-metallic-sheen {
+            animation: metallic-sheen 5s linear infinite;
+        }
+        .animate-subtle-flicker {
+            animation: subtle-flicker 7s ease-in-out infinite alternate;
+        }
+        .animate-wave {
+             animation: wave 5s ease-in-out infinite;
+        }
+        .animate-watermark-wave {
+            animation: watermark-wave 25s ease-in-out infinite;
+        }
+
+        /* Disable printing */
+        @media print {
+            body > #root {
+                display: none !important;
+            }
+            body::after {
+                content: 'این قابلیت در نسخه پرو در دسترس خواهد بود';
+                position: fixed;
+                top: 40%;
+                left: 50%;
+                transform: translateX(-50%);
+                text-align: center;
+                font-size: 1.5rem;
+                color: #000;
+                font-family: 'Vazirmatn', sans-serif;
+            }
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@tsparticles/react": "https://aistudiocdn.com/@tsparticles/react@^3.0.0",
+    "@tsparticles/slim": "https://aistudiocdn.com/@tsparticles/slim@^3.9.1",
+    "@tsparticles/engine": "https://aistudiocdn.com/@tsparticles/engine@^3.9.1",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24"
+  }
+}
+</script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
