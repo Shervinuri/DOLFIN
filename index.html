@@ -40,44 +40,12 @@
             100% { background-position: 0% 0%, 0% 50%; }
         }
 
-        /* New styles for animated border */
-        @property --angle {
-            syntax: '<angle>';
-            initial-value: 0deg;
-            inherits: false;
-        }
-
-        @keyframes rotate-angle {
-            to {
-                --angle: 360deg;
-            }
-        }
-
-        .animated-iframe-border::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            padding: 1px; /* border thickness */
-            background: conic-gradient(
-                from var(--angle),
-                #00FFFF 0deg,
-                #00FFFF 175deg,
-                #8A2BE2 178deg, /* Small purple section */
-                #8A2BE2 182deg,
-                #00FFFF 185deg,
-                #00FFFF 360deg
-            );
-            animation: rotate-angle 4s linear infinite;
-            -webkit-mask:
-                linear-gradient(#fff 0 0) content-box,
-                linear-gradient(#fff 0 0);
-            mask:
-                linear-gradient(#fff 0 0) content-box,
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none; /* Allow clicks/touches to pass through */
+        /* New styles for neon border effect */
+        .animated-iframe-border {
+            box-shadow: 0 0 0 1px #00ffff,
+                        0 0 5px #00ffff,
+                        0 0 12px #00ffff,
+                        0 0 20px #00209f;
         }
 
         .animate-metallic-sheen {
@@ -94,8 +62,8 @@
         }
 
         /* Disable printing */
-        @media print {رو
-            body > #root {
+        @media print {
+            body > #root رو {
                 display: none !important;
             }
             body::after {
