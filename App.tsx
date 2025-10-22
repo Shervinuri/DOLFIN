@@ -7,8 +7,8 @@ const BackgroundPattern = () => (
     <div
         className="fixed top-0 left-0 w-full h-full -z-20 bg-gradient-to-[115deg] from-transparent from-40% via-[rgba(255,255,255,0.08)] via-48% to-transparent to-60% [background-size:250%_250%] animate-metallic-sheen"
         style={{
-            maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='35' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3Ctext x='50' y='85' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3C/svg%3E")`,
-            WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='35' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3Ctext x='50' y='85' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3C/svg%3E")`,
+            maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='35' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3Ctext x='50' y='85' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3C/svg%3E")`,
+            WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='35' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3Ctext x='50' y='85' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3C/svg%3E")`,
         }}
     />
 );
@@ -26,7 +26,7 @@ const SideGlow = ({ side }: { side: 'left' | 'right' }) => (
 );
 
 const WatermarkBackground = () => {
-    const watermarkSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cg transform='rotate(-45 200 200)'%3E%3Ctext x='25' y='50' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3Ctext x='225' y='50' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3Ctext x='125' y='150' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3Ctext x='325' y='150' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3Ctext x='25' y='250' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3Ctext x='225' y='250' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3Ctext x='125' y='350' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3Ctext x='325' y='350' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3C/g%3E%3C/svg%3E")`;
+    const watermarkSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w.org/2000/svg' width='400' height='400'%3E%3Cg transform='rotate(-45 200 200)'%3E%3Ctext x='25' y='50' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3Ctext x='225' y='50' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3Ctext x='125' y='150' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3Ctext x='325' y='150' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3Ctext x='25' y='250' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3Ctext x='225' y='250' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3Ctext x='125' y='350' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3Ctext x='325' y='350' font-size='20' font-weight='700' fill='rgba(255,255,255,0.03)' font-family='Vazirmatn, sans-serif'%3ESHΞN™%3C/text%3E%3C/g%3E%3C/svg%3E")`;
 
     return (
         <div 
@@ -52,6 +52,15 @@ const App = () => {
     const [alertMessage, setAlertMessage] = React.useState<string | null>(null);
 
     const handleInteractionAttempt = (e: React.MouseEvent | React.ClipboardEvent) => {
+        // Allow interaction if the target or its parent has 'select-text' class
+        let target = e.target as HTMLElement;
+        while (target && target !== e.currentTarget) {
+            if (target.classList.contains('select-text')) {
+                return;
+            }
+            target = target.parentElement as HTMLElement;
+        }
+
         if (alertMessage) return; // Prevent spamming alerts
         e.preventDefault();
         const message = "این قابلیت در نسخه پرو در دسترس خواهد بود";
@@ -59,6 +68,13 @@ const App = () => {
         setTimeout(() => {
             setAlertMessage(null);
         }, 3000);
+    };
+    
+    const matrixTextStyle: React.CSSProperties = {
+        backgroundImage: 'radial-gradient(rgba(0,0,0,0.4) 1px, transparent 1px)',
+        backgroundSize: '3px 3px',
+        WebkitBackgroundClip: 'text',
+        backgroundClip: 'text',
     };
 
     return (
@@ -79,8 +95,8 @@ const App = () => {
                     <WatermarkBackground />
 
                     <header className="relative z-10 bg-transparent text-center shrink-0">
-                         <div className="w-full h-24 relative overflow-hidden">
-                            {/* Gradients to enhance the particle effect */}
+                        <div className="absolute inset-0 overflow-hidden">
+                             {/* Gradients to enhance the particle effect */}
                             <div className="absolute inset-x-10 sm:inset-x-20 bottom-0 bg-gradient-to-r from-transparent via-[#00209f] to-transparent h-px w-3/4 blur" />
                             <div className="absolute inset-x-10 sm:inset-x-20 bottom-0 bg-gradient-to-r from-transparent via-[#00209f] to-transparent h-[2px] w-3/4" />
                             <div className="absolute inset-x-30 sm:inset-x-60 bottom-0 bg-gradient-to-r from-transparent via-[#12afff] to-transparent h-px w-1/4" />
@@ -93,10 +109,29 @@ const App = () => {
                                 particleDensity={800}
                                 className="w-full h-full"
                                 particleColor="#FFFFFF"
-                                direction="up"
                             />
                             {/* Radial Gradient to prevent sharp edges of the particle container */}
                             <div className="absolute inset-0 w-full h-full bg-[#121212] [mask-image:radial-gradient(400px_100px_at_bottom,transparent_35%,white)]"></div>
+                        </div>
+
+                        <div className="relative z-10 text-center py-4 shrink-0 select-text">
+                            <h1 
+                                className="text-lg sm:text-xl font-bold bg-gradient-to-r from-[#00ffff] via-[#8a2be2] to-[#12afffc0] bg-[size:400%_400%] bg-clip-text text-transparent animate-wave"
+                            >
+                                &lt; بـه درّندگی کوسـه ام با مغز دلـفیـن &gt;
+                            </h1>
+                            <p 
+                                className="text-[10px] sm:text-xs text-gray-500 mt-4 tracking-[0.2em] uppercase"
+                                style={matrixTextStyle}
+                            >
+                                Script , Hack , Criminal , Sexual , Darkweb
+                            </p>
+                            <p 
+                                className="text-xs sm:text-sm text-gray-400 mt-1 font-light tracking-[0.1em]"
+                                style={matrixTextStyle}
+                            >
+                                LLM By SHΞN™
+                            </p>
                         </div>
                     </header>
 
@@ -105,7 +140,7 @@ const App = () => {
                         src="https://chat.dphn.ai" 
                         title="DOLFIN"
                     ></iframe>
-                    
+
                     <footer className="relative z-10 bg-transparent text-center shrink-0">
                         {/* Particle container starts here, positioned to appear under the iframe */}
                         <div className="w-full h-24 relative overflow-hidden">
