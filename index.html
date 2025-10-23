@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DOLPHINai🐬SHΞN™</title>
+    <title>Holographic Chat Interface</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,6 @@
     <style>
         body {
             font-family: 'Vazirmatn', sans-serif;
-            -webkit-touch-callout: none; /* iOS Safari */
         }
 
         /* Custom animations and complex styles that can't be done with Tailwind classes alone */
@@ -93,25 +92,6 @@
             margin-left: 4px; /* Space for RTL text */
             vertical-align: middle;
             animation: blink-caret 0.75s step-end infinite;
-        }
-
-
-        /* Disable printing */
-        @media print {
-            body > #root {
-                display: none !important;
-            }
-            body::after {
-                content: 'این قابلیت در نسخه پرو در دسترس خواهد بود';
-                position: fixed;
-                top: 40%;
-                left: 50%;
-                transform: translateX(-50%);
-                text-align: center;
-                font-size: 1.5rem;
-                color: #000;
-                font-family: 'Vazirmatn', sans-serif;
-            }
         }
     </style>
 <script type="importmap">

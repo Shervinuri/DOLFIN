@@ -127,30 +127,11 @@ const NeonDivider = ({ glowUp = false }: { glowUp?: boolean }) => (
 
 
 const MainInterface = () => {
-    const [alertMessage, setAlertMessage] = React.useState<string | null>(null);
     const [appHeight, setAppHeight] = React.useState('100vh');
 
     React.useEffect(() => {
         setAppHeight(`${window.innerHeight}px`);
     }, []);
-
-    const handleInteractionAttempt = (e: React.MouseEvent | React.ClipboardEvent) => {
-        let target = e.target as HTMLElement;
-        while (target && target !== e.currentTarget) {
-            if (target.classList.contains('select-text')) {
-                return;
-            }
-            target = target.parentElement as HTMLElement;
-        }
-
-        if (alertMessage) return;
-        e.preventDefault();
-        const message = "این قابلیت در نسخه پرو در دسترس خواهد بود";
-        setAlertMessage(message);
-        setTimeout(() => {
-            setAlertMessage(null);
-        }, 3000);
-    };
     
     const matrixTextStyle: React.CSSProperties = {
         backgroundImage: 'radial-gradient(rgba(0,0,0,0.4) 1px, transparent 1px)',
@@ -161,10 +142,8 @@ const MainInterface = () => {
 
     return (
         <main 
-            className="bg-[#121212] flex justify-center items-center w-full p-2 sm:p-8 overflow-hidden relative select-none"
+            className="bg-[#121212] flex justify-center items-center w-full p-2 sm:p-8 overflow-hidden relative"
             style={{ height: appHeight }}
-            onContextMenu={handleInteractionAttempt}
-            onCopy={handleInteractionAttempt}
         >
             <BackgroundPattern />
 
@@ -217,6 +196,8 @@ const MainInterface = () => {
                                 className="w-full h-full border-none block bg-transparent" 
                                 src="https://chat.dphn.ai" 
                                 title="DOLFIN"
+                                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
+                                allow="clipboard-write"
                             ></iframe>
                         </div>
 
@@ -249,20 +230,6 @@ const MainInterface = () => {
                     </div>
                 </div>
             </div>
-
-            <AnimatePresence>
-                {alertMessage && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 50, transition: { duration: 0.2 } }}
-                        transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-                        className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 p-3 px-6 rounded-lg bg-[rgba(0,32,159,0.8)] text-white shadow-lg backdrop-blur-sm border border-cyan-400/50"
-                    >
-                        {alertMessage}
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </main>
     );
 };
