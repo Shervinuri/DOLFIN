@@ -267,6 +267,20 @@ const MainInterface = () => {
     );
 };
 
+const DesktopWarning = () => (
+    <div className="hidden md:flex flex-col justify-center items-center w-full h-screen bg-[#121212] text-center p-8">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-24 text-cyan-400 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+        </svg>
+        <h2 className="text-2xl font-bold text-white mb-2">
+            لطفا در حالت موبایل مشاهده کنید
+        </h2>
+        <p className="text-gray-400 max-w-md">
+            این برنامه برای بهترین تجربه، فقط برای نمایش در دستگاه‌های موبایل طراحی شده است.
+        </p>
+    </div>
+);
+
 const App = () => {
     const [isLoading, setIsLoading] = React.useState(true);
 
@@ -275,21 +289,27 @@ const App = () => {
 
     return (
         <>
-            <div
-                style={{
-                    visibility: isLoading ? 'hidden' : 'visible',
-                    opacity: isLoading ? 0 : 1,
-                    transition: 'opacity 1s ease-in-out',
-                    height: '100%',
-                    width: '100%',
-                }}
-            >
-                <MainInterface />
+            {/* Mobile-only content */}
+            <div className="md:hidden">
+                 <div
+                    style={{
+                        visibility: isLoading ? 'hidden' : 'visible',
+                        opacity: isLoading ? 0 : 1,
+                        transition: 'opacity 1s ease-in-out',
+                        height: '100%',
+                        width: '100%',
+                    }}
+                >
+                    <MainInterface />
+                </div>
+
+                <AnimatePresence>
+                    {isLoading && <LoadingScreen text={disclaimerText} speed={typingSpeed} onComplete={() => setIsLoading(false)} />}
+                </AnimatePresence>
             </div>
 
-            <AnimatePresence>
-                {isLoading && <LoadingScreen text={disclaimerText} speed={typingSpeed} onComplete={() => setIsLoading(false)} />}
-            </AnimatePresence>
+            {/* Desktop warning */}
+            <DesktopWarning />
         </>
     );
 };
