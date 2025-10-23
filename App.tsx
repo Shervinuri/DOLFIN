@@ -193,7 +193,7 @@ const MainInterface = () => {
                                 <h1 
                                     className="text-lg sm:text-xl font-bold bg-gradient-to-r from-[#00ffff] via-[#8a2be2] to-[#12afffc0] bg-[size:400%_400%] bg-clip-text text-transparent animate-wave"
                                 >
-                                    &lt; بـه درّندگی کوسـه ام با مغز دلـفیـن &gt;
+                                    &lt; بـه درّندگی کـوسه‌ایم با مغز دلـفیـن &gt;
                                 </h1>
                                 <p 
                                     className="text-[10px] sm:text-xs text-gray-500 mt-4 tracking-[0.2em] uppercase"
