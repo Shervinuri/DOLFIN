@@ -46,6 +46,16 @@
             100% { background-position: -100% 50%; }
         }
 
+        /* Loading Screen Animations */
+        @keyframes spin-y {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+        @keyframes blink-caret {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
         /* New styles for neon border effect */
         .animated-iframe-border {
             box-shadow: 0 0 0 1px #00ffff,
@@ -69,10 +79,26 @@
         .animate-neon-wave {
             animation: neon-wave 4s linear infinite;
         }
+        
+        /* Loading Screen utilities */
+        .logo-spin {
+            animation: spin-y 4s linear infinite;
+            transform-style: preserve-3d;
+        }
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: #00ffff;
+            margin-left: 4px; /* Space for RTL text */
+            vertical-align: middle;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
 
         /* Disable printing */
         @media print {
-            body > #root رو {
+            body > #root {
                 display: none !important;
             }
             body::after {

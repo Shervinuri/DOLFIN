@@ -3,31 +3,68 @@ import * as React from 'react';
 import { SparklesCore } from './components/ui/sparkles';
 import { AnimatePresence, motion } from 'framer-motion';
 
+const LoadingScreen = ({ text, speed, onComplete }: { text: string; speed: number; onComplete: () => void; }) => {
+    const [typedText, setTypedText] = React.useState('');
+    const [progress, setProgress] = React.useState(0);
+
+    React.useEffect(() => {
+        if (typedText.length < text.length) {
+            const timeoutId = setTimeout(() => {
+                const nextCharIndex = typedText.length;
+                setTypedText(text.substring(0, nextCharIndex + 1));
+                setProgress(((nextCharIndex + 1) / text.length) * 100);
+            }, speed);
+            return () => clearTimeout(timeoutId);
+        } else {
+            // When typing is complete, wait a moment then call onComplete
+            const completionTimeout = setTimeout(() => {
+                onComplete();
+            }, 500);
+            return () => clearTimeout(completionTimeout);
+        }
+    }, [typedText, text, speed, onComplete]);
+
+    return (
+        <motion.div
+            key="loader"
+            className="bg-[#121212] flex flex-col justify-center items-center w-full h-screen p-4 fixed inset-0 z-[9999]"
+            exit={{ opacity: 0, transition: { duration: 0.5 } }}
+        >
+            <img
+                src="https://raw.githubusercontent.com/Shervinuri/Shervinuri.github.io/refs/heads/main/1712259501956.png"
+                alt="Loading Logo"
+                className="w-32 h-32 sm:w-40 sm:h-40 logo-spin"
+            />
+            <div className="w-full max-w-md h-2 bg-gray-800/50 rounded-full overflow-hidden mt-8 border border-gray-700">
+                <div 
+                    className="h-full bg-cyan-400 rounded-full"
+                    style={{
+                        width: `${progress}%`,
+                        boxShadow: '0 0 4px #00ffff, 0 0 8px #00ffff',
+                        transition: 'width 0.05s linear'
+                    }}
+                ></div>
+            </div>
+            <div className="w-full max-w-2xl mt-6 text-center">
+                <p className="text-gray-400 text-sm leading-relaxed" dir="rtl">
+                    {typedText}
+                    {typedText.length < text.length && (
+                        <span className="cursor"></span>
+                    )}
+                </p>
+            </div>
+        </motion.div>
+    );
+};
+
+
 const BackgroundPattern = () => (
     <div
         className="fixed top-0 left-0 w-full h-full -z-20 bg-gradient-to-[115deg] from-transparent from-40% via-[rgba(255,255,255,0.08)] via-48% to-transparent to-60% [background-size:250%_250%] animate-metallic-sheen"
         style={{
-            maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='35' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3Ctext x='50' y='85' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3C/svg%3E")`,
-            WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='35' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3Ctext x='50' y='85' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3C/svg%3E")`,
+            maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='35' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3Ctext x='50' y='85' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3C/svg%3E")`,
+            WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='35' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3Ctext x='50' y='85' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3C/svg%3E")`,
         }}
-    />
-);
-
-const CenterGlow = () => (
-    <div
-        className="absolute -z-10 inset-0 blur-[45px] animate-subtle-flicker opacity-70"
-        // FIX: Cast the style object to React.CSSProperties to allow for custom CSS properties (--transform-flicker-from).
-        // This is necessary because TypeScript's default typings for inline styles do not include CSS custom properties,
-        // which would otherwise cause a type error.
-        style={{
-            background: `
-                radial-gradient(ellipse 20% 70% at 35% 50%, rgba(0, 32, 159, 0.4) 0%, transparent 80%),
-                radial-gradient(ellipse 20% 70% at 65% 50%, rgba(0, 32, 159, 0.4) 0%, transparent 80%)
-            `,
-            transformOrigin: 'center',
-            '--transform-flicker-from': 'scaleY(0.95)',
-            '--transform-flicker-to': 'scaleY(1.05)',
-        } as React.CSSProperties}
     />
 );
 
@@ -54,9 +91,7 @@ const WatermarkBackground = () => {
 };
 
 const NeonDivider = ({ glowUp = false }: { glowUp?: boolean }) => (
-    // 1. Remove margin for a snug fit.
     <div className="relative h-px w-full shrink-0">
-        {/* This is the core, solid line with the animated gradient */}
         <div 
             className="w-full h-full animate-neon-wave"
             style={{
@@ -64,17 +99,13 @@ const NeonDivider = ({ glowUp = false }: { glowUp?: boolean }) => (
                 backgroundSize: '200% 100%',
             }}
         />
-        {/* This div creates the glow effect that emanates from the line */}
         <div 
-            className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-16 animate-neon-wave" // A tall container for the glow, centered on the line
+            className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-16 animate-neon-wave"
             style={{
                 backgroundImage: 'linear-gradient(to right, transparent, #00ffff, #8a2be2, #00ff80, #8a2be2, #00ffff, transparent)',
                 backgroundSize: '200% 100%',
-                filter: 'blur(12px)', // A more significant blur for a softer glow
+                filter: 'blur(12px)',
                 opacity: 0.7,
-                // The mask creates the shape of the glow:
-                // - Strongest in the horizontal center, fading to the sides.
-                // - Only appears on one side of the line (up or down), preventing it from bleeding into the content area.
                 maskImage: `
                     radial-gradient(
                         ellipse 80% 50% at 50% ${glowUp ? '100%' : '0%'}, 
@@ -95,18 +126,15 @@ const NeonDivider = ({ glowUp = false }: { glowUp?: boolean }) => (
 );
 
 
-const App = () => {
+const MainInterface = () => {
     const [alertMessage, setAlertMessage] = React.useState<string | null>(null);
     const [appHeight, setAppHeight] = React.useState('100vh');
 
     React.useEffect(() => {
-        // Set a fixed height for the app to prevent layout shifts when the mobile keyboard appears.
-        // This runs once on component mount.
         setAppHeight(`${window.innerHeight}px`);
     }, []);
 
     const handleInteractionAttempt = (e: React.MouseEvent | React.ClipboardEvent) => {
-        // Allow interaction if the target or its parent has 'select-text' class
         let target = e.target as HTMLElement;
         while (target && target !== e.currentTarget) {
             if (target.classList.contains('select-text')) {
@@ -115,7 +143,7 @@ const App = () => {
             target = target.parentElement as HTMLElement;
         }
 
-        if (alertMessage) return; // Prevent spamming alerts
+        if (alertMessage) return;
         e.preventDefault();
         const message = "این قابلیت در نسخه پرو در دسترس خواهد بود";
         setAlertMessage(message);
@@ -134,14 +162,13 @@ const App = () => {
     return (
         <main 
             className="bg-[#121212] flex justify-center items-center w-full p-2 sm:p-8 overflow-hidden relative select-none"
-            style={{ height: appHeight }} // Use fixed height to avoid keyboard resize issue
+            style={{ height: appHeight }}
             onContextMenu={handleInteractionAttempt}
             onCopy={handleInteractionAttempt}
         >
             <BackgroundPattern />
 
             <div className="relative w-full md:w-[90%] max-w-[1200px] h-[90%] md:h-[85%] rounded-[20px] z-10 p-[10px] bg-gradient-to-br from-[#12afffc0] to-[#00209f] shadow-[inset_3px_3px_8px_rgba(0,0,0,0.6),inset_-3px_-3px_8px_rgba(255,255,255,0.15),0_10px_30px_rgba(0,0,0,0.5)]">
-                <CenterGlow />
                 
                 <div className="absolute top-[10px] right-[10px] bottom-[10px] left-[10px] bg-[#121212] rounded-[20px] z-0" />
                 
@@ -159,7 +186,6 @@ const App = () => {
                                     className="w-full h-full"
                                     particleColor="#FFFFFF"
                                 />
-                                {/* Radial Gradient to prevent sharp edges of the particle container */}
                                 <div className="absolute inset-0 w-full h-full bg-[#121212] [mask-image:radial-gradient(400px_100px_at_bottom,transparent_35%,white)]"></div>
                             </div>
 
@@ -197,7 +223,6 @@ const App = () => {
                         <NeonDivider />
 
                         <footer className="relative z-10 bg-transparent text-center shrink-0 h-24">
-                            {/* Particle container and effects */}
                             <div className="absolute inset-0 w-full h-full overflow-hidden z-[9999]">
                                 <SparklesCore
                                     background="transparent"
@@ -207,11 +232,9 @@ const App = () => {
                                     className="w-full h-full"
                                     particleColor="#FFFFFF"
                                 />
-                                {/* Radial Gradient to prevent sharp edges of the particle container */}
                                 <div className="absolute inset-0 w-full h-full bg-[#121212] [mask-image:radial-gradient(400px_100px_at_top,transparent_35%,white)]"></div>
                             </div>
 
-                            {/* Content wrapper */}
                             <div className="relative z-10 w-full h-full flex items-end justify-center pb-4">
                                  <a 
                                     href="https://t.me/shervini" 
@@ -241,6 +264,33 @@ const App = () => {
                 )}
             </AnimatePresence>
         </main>
+    );
+};
+
+const App = () => {
+    const [isLoading, setIsLoading] = React.useState(true);
+
+    const disclaimerText = "هشدار:  این پروژه با اهداف آموزشی و تمرینی هسته پردازنده مدل را از حالت استاندارد و محدود خارج نموده است لذا عواقب هرگونه بهره‌برداری ناصحیح و سو استفاده ی مجرمانه از محتوای تولیدی توسط این هوش مصنوعی بر عهده ی شخص کاربر بوده و هیچگونه مسئولیت اخلاقی و قانونی متعاقبی را متوجه طراح و تعلیم دهنده مدل نخواهد کرد.";
+    const typingSpeed = 40; // ms per character, slower for readability
+
+    return (
+        <>
+            <div
+                style={{
+                    visibility: isLoading ? 'hidden' : 'visible',
+                    opacity: isLoading ? 0 : 1,
+                    transition: 'opacity 1s ease-in-out',
+                    height: '100%',
+                    width: '100%',
+                }}
+            >
+                <MainInterface />
+            </div>
+
+            <AnimatePresence>
+                {isLoading && <LoadingScreen text={disclaimerText} speed={typingSpeed} onComplete={() => setIsLoading(false)} />}
+            </AnimatePresence>
+        </>
     );
 };
 
