@@ -7,8 +7,8 @@ const BackgroundPattern = () => (
     <div
         className="fixed top-0 left-0 w-full h-full -z-20 bg-gradient-to-[115deg] from-transparent from-40% via-[rgba(255,255,255,0.08)] via-48% to-transparent to-60% [background-size:250%_250%] animate-metallic-sheen"
         style={{
-            maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='35' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3Ctext x='50' y='85' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3C/svg%3E")`,
-            WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w.w3.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='35' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3Ctext x='50' y='85' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3C/svg%3E")`,
+            maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='35' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3Ctext x='50' y='85' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3C/svg%3E")`,
+            WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='35' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3Ctext x='50' y='85' font-size='10' font-weight='700' fill='white' transform='rotate(-45 50 50)'%3ESHΞN™%3C/text%3E%3C/svg%3E")`,
         }}
     />
 );
@@ -52,6 +52,48 @@ const WatermarkBackground = () => {
         </div>
     );
 };
+
+const NeonDivider = ({ glowUp = false }: { glowUp?: boolean }) => (
+    // 1. Remove margin for a snug fit.
+    <div className="relative h-px w-full shrink-0">
+        {/* This is the core, solid line with the animated gradient */}
+        <div 
+            className="w-full h-full animate-neon-wave"
+            style={{
+                backgroundImage: 'linear-gradient(to right, transparent, #00ffff, #8a2be2, #00ff80, #8a2be2, #00ffff, transparent)',
+                backgroundSize: '200% 100%',
+            }}
+        />
+        {/* This div creates the glow effect that emanates from the line */}
+        <div 
+            className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-16 animate-neon-wave" // A tall container for the glow, centered on the line
+            style={{
+                backgroundImage: 'linear-gradient(to right, transparent, #00ffff, #8a2be2, #00ff80, #8a2be2, #00ffff, transparent)',
+                backgroundSize: '200% 100%',
+                filter: 'blur(12px)', // A more significant blur for a softer glow
+                opacity: 0.7,
+                // The mask creates the shape of the glow:
+                // - Strongest in the horizontal center, fading to the sides.
+                // - Only appears on one side of the line (up or down), preventing it from bleeding into the content area.
+                maskImage: `
+                    radial-gradient(
+                        ellipse 80% 50% at 50% ${glowUp ? '100%' : '0%'}, 
+                        black 30%, 
+                        transparent 80%
+                    )
+                `,
+                WebkitMaskImage: `
+                    radial-gradient(
+                        ellipse 80% 50% at 50% ${glowUp ? '100%' : '0%'}, 
+                        black 30%, 
+                        transparent 80%
+                    )
+                `,
+            }}
+        />
+    </div>
+);
+
 
 const App = () => {
     const [alertMessage, setAlertMessage] = React.useState<string | null>(null);
@@ -141,6 +183,8 @@ const App = () => {
                                 </p>
                             </div>
                         </header>
+                        
+                        <NeonDivider glowUp={true} />
 
                         <div className="relative z-10 flex-grow w-full min-h-0">
                             <iframe 
@@ -150,6 +194,7 @@ const App = () => {
                             ></iframe>
                         </div>
 
+                        <NeonDivider />
 
                         <footer className="relative z-10 bg-transparent text-center shrink-0 h-24">
                             {/* Particle container and effects */}

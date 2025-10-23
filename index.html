@@ -40,6 +40,12 @@
             100% { background-position: 0% 0%, 0% 50%; }
         }
 
+        /* New neon wave animation */
+        @keyframes neon-wave {
+            0% { background-position: 200% 50%; }
+            100% { background-position: -100% 50%; }
+        }
+
         /* New styles for neon border effect */
         .animated-iframe-border {
             box-shadow: 0 0 0 1px #00ffff,
@@ -59,6 +65,9 @@
         }
         .animate-watermark-wave {
             animation: watermark-wave 25s ease-in-out infinite;
+        }
+        .animate-neon-wave {
+            animation: neon-wave 4s linear infinite;
         }
 
         /* Disable printing */
